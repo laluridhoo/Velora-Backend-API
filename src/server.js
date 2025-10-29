@@ -21,8 +21,8 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/cars", carRoutes);
-app.use("/api/rentals", rentalRoutes);
+// app.use("/api/cars", carRoutes);
+// app.use("/api/rentals", rentalRoutes);
 
 // Default route
 app.get("/", (req, res) => {
