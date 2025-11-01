@@ -10,10 +10,10 @@ const generateToken = (id) => {
 // Register
 exports.registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { username, email, password, fullName } = req.body;
 
     // Validation
-    if (!name || !email || !password) {
+    if (!username || !email || !password || !fullName) {
       return errorResponse(res, 400, "All fields are required", "MISSING_FIELDS");
     }
 
@@ -22,17 +22,19 @@ exports.registerUser = async (req, res) => {
       return errorResponse(res, 400, "User already exists", "USER_EXISTS");
     }
 
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ username, email, password, fullName });
 
     successResponse(res, 201, "User registered successfully", {
       user: {
         id: user._id,
-        name: user.name,
+        name: user.username,
         email: user.email,
+        fullName: user.fullName,
       },
       token: generateToken(user._id),
     });
   } catch (error) {
+    console.error("🚨 ERROR REGISTER:", error);
     errorResponse(res, 500, "Server error during registration", "SERVER_ERROR");
   }
 };

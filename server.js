@@ -1,13 +1,14 @@
 require("dotenv").config();
+console.log("JWT_SECRET =", process.env.JWT_SECRET);
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const connectDB = require("./config/db");
+const connectDB = require("./src/config/db");
 
 // Import routes
-const authRoutes = require("./routers/authRoutes");
-const carRoutes = require("./routers/carRoutes");
-const rentalRoutes = require("./routers/rentalRoutes");
+const authRoutes = require("./src/routers/authRoutes");
+const carRoutes = require("./src/routers/carRoutes");
+const rentalRoutes = require("./src/routers/rentalRoutes");
 
 const app = express();
 
